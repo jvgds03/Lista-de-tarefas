@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
 
 function App() {
+
+  const [tarefas, setTarefas] = useState([
+    'Pagar conta de luz',
+    'Estudar React JS',
+    'Estudar as materias da faculdade',
+    'Atualizar/melhorar meu curriculo', 
+    'Ir ao mercado'
+  ]);
+  const [input, setInput] = useState('');
+
+  function adicionarTarefa(){
+    setTarefas([...tarefas, input])
+    setInput('');
+  }
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <ul>
+        {tarefas.map(tarefa => (
+          <li key={tarefa}>{tarefa}</li>
+        ))}
+      </ul>
+    
+      <input type='text' value={input} onChange={e => setInput(e.target.value)}/><br/>
+      <button type='button' onClick={adicionarTarefa}>Adicionar</button>
+
     </div>
   );
 }
